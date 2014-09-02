@@ -48,7 +48,7 @@ def login():
 @login_required
 def main():
     g.db = connect_db()
-    cur = g.db.execute('select * from posts')
+    cur = g.db.execute('select * from posts order by rownum desc')
     posts = [dict(title=row[0], post=row[1]) for row in cur.fetchall()]
     g.db.close()
     return render_template('main.html', posts=posts)
